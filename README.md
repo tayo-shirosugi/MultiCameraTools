@@ -42,7 +42,7 @@ MultiCameraTools/
 Python 3.8 以上が必要です。追加ライブラリは不要です。
 
 ```bash
-git clone https://github.com/yourname/MultiCameraTools.git
+git clone https://github.com/tayo-shirosugi/MultiCameraTools.git
 cd MultiCameraTools
 ```
 
