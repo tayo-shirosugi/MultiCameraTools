@@ -1,0 +1,20 @@
+{
+    "bpm": 170,
+    "beats_per_sub": 1,
+    "schedule": [
+        {
+            "start": 0,
+            "end": 10,
+            "effect": "mosaic-blink",
+            "cameras": 16,
+            "note": "0-5s: Mosaic Blink (16 cameras)"
+        },
+        {
+            "start": 10,
+            "end": null,
+            "effect": "all-visible",
+            "cameras": 1,
+            "note": "140s+: 1カメラ（エフェクトなし、フルスクリーン）"
+        }
+    ]
+}

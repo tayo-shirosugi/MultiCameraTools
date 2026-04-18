@@ -1,0 +1,145 @@
+{
+    "bpm": 170,
+    "beats_per_sub": 1,
+    "schedule": [
+        {
+            "start": 10,
+            "end": 20,
+            "effect": "radial-chronos",
+            "delay": 0.2,
+            "cameras": 9,
+            "note": "10-20s: Radial Ripple (Delay 0.2s)"
+        },
+        {
+            "start": 20,
+            "end": 30,
+            "effect": "chronos-cascade",
+            "delay": 0.25,
+            "cameras": 4,
+            "note": "20-30s: Cascade Delay (4 cameras)"
+        },
+        {
+            "start": 30,
+            "end": 40,
+            "effect": "dimension-roulette",
+            "cameras": 9,
+            "note": "30-40s: Dimension Roulette"
+        },
+        {
+            "start": 40,
+            "end": 50,
+            "effect": "outline-fill",
+            "step_delay": 5.0,
+            "color_line": {
+                "r": 1,
+                "g": 1,
+                "b": 1
+            },
+            "color_bg": {
+                "r": 0,
+                "g": 0,
+                "b": 0
+            },
+            "cameras": 9,
+            "note": "40-50s: Outline Fill (White on Black)"
+        },
+        {
+            "start": 50,
+            "end": 60,
+            "effect": "outline-wipe",
+            "step_delay": 5.0,
+            "color_line": {
+                "r": 1,
+                "g": 1,
+                "b": 1
+            },
+            "color_bg": {
+                "r": 0,
+                "g": 0,
+                "b": 0
+            },
+            "cameras": 9,
+            "note": "50-60s: Outline Wipe (Red on Black)"
+        },
+        {
+            "start": 60,
+            "end": 70,
+            "effect": "mosaic-shuffle",
+            "density": 0.66,
+            "cameras": 9,
+            "note": "60-70s: Mosaic Shuffle"
+        },
+        {
+            "start": 70,
+            "end": 80,
+            "effect": "split-view",
+            "angle": 90.0,
+            "cameras": 9,
+            "note": "70-80s: Split View (Triptych)"
+        },
+        {
+            "start": 80,
+            "end": 90,
+            "effect": "surround-view",
+            "cameras": 4,
+            "note": "80-90s: Surround View (Front, Right, Back, Left)"
+        },
+        {
+            "start": 90,
+            "end": 100,
+            "effect": "panoptic-view",
+            "cameras": 9,
+            "note": "90-100s: Panoptic View (Center + 8 surrounding directions)"
+        },
+        {
+            "start": 100,
+            "end": 110,
+            "effect": "clone-grid",
+            "cameras": 9,
+            "note": "100-110s: Clone Grid"
+        },
+        {
+            "start": 110,
+            "end": 120,
+            "effect": "vortex-spin",
+            "speed": 60.0,
+            "mode": "sync",
+            "cameras": 9,
+            "note": "110-120s: Vortex Spin (Sync mode)"
+        },
+        {
+            "start": 120,
+            "end": 130,
+            "effect": "symmetry-view",
+            "symmetry_type": "point",
+            "cameras": 4,
+            "note": "120-130s: Symmetric View (Point)"
+        },
+        {
+            "start": 130,
+            "end": 140,
+            "effect": "symmetry-view",
+            "symmetry_type": "mirror",
+            "cameras": 4,
+            "note": "130-140s: Symmetric View (Mirror) with Red Outline on Right",
+            "outline_side": "right",
+            "color_line": {
+                "r": 1,
+                "g": 0,
+                "b": 0
+            },
+            "color_bg": {
+                "r": 0,
+                "g": 0,
+                "b": 0
+            }
+        },
+        {
+            "start": 140,
+            "end": null,
+            "effect": "all-visible",
+            "cameras": 1,
+            "note": "140s+: 1カメラ（エフェクトなし、フルスクリーン）"
+        }
+    ]
+}

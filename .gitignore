@@ -1,0 +1,18 @@
+# Output & Temp Directories
+output/
+output_*/
+temp/
+logs/
+__pycache__/
+
+# Test artifacts
+.coverage
+.pytest_cache/
+
+# Ignore config/json files in root unless they are generators
+*.json
+!examples/*.json
+!generator_*.json
+
+# Logs
+*.log
