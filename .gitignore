@@ -13,6 +13,7 @@ __pycache__/
 *.json
 !examples/*.json
 !generator_*.json
+!web/*.json
 
 # Logs
 *.log
