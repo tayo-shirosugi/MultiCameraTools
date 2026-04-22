@@ -61,17 +61,17 @@ def test_nona_grid_generation(song_script_basic, temp_output_dir):
     # Col 1 (Center): x = 1*640 + 3 = 643. LeftEdge = 643. Gap = 6px (637-643).
     # Col 2 (Right):  x = 2*640 + 3 = 1283.
     
-    prof_path_1 = os.path.join(temp_output_dir, "Profiles", "SongMultiCam", "input_Cam_Grid3_01.json")
+    prof_path_1 = os.path.join(temp_output_dir, "Profiles", "input", "input_Cam_Grid3_01.json")
     if not os.path.exists(prof_path_1):
-        prof_path_1 = os.path.join(temp_output_dir, "Profiles", "SongMultiCam", "Cam_Grid3_01.json")
+        prof_path_1 = os.path.join(temp_output_dir, "Profiles", "input", "Cam_Grid3_01.json")
         
-    prof_path_5 = os.path.join(temp_output_dir, "Profiles", "SongMultiCam", "input_Cam_Grid3_05.json")
+    prof_path_5 = os.path.join(temp_output_dir, "Profiles", "input", "input_Cam_Grid3_05.json")
     if not os.path.exists(prof_path_5):
-        prof_path_5 = os.path.join(temp_output_dir, "Profiles", "SongMultiCam", "Cam_Grid3_05.json")
+        prof_path_5 = os.path.join(temp_output_dir, "Profiles", "input", "Cam_Grid3_05.json")
         
-    prof_path_9 = os.path.join(temp_output_dir, "Profiles", "SongMultiCam", "input_Cam_Grid3_09.json")
+    prof_path_9 = os.path.join(temp_output_dir, "Profiles", "input", "input_Cam_Grid3_09.json")
     if not os.path.exists(prof_path_9):
-        prof_path_9 = os.path.join(temp_output_dir, "Profiles", "SongMultiCam", "Cam_Grid3_09.json")
+        prof_path_9 = os.path.join(temp_output_dir, "Profiles", "input", "Cam_Grid3_09.json")
 
     with open(prof_path_1, "r") as f: p1 = json.load(f)
     with open(prof_path_5, "r") as f: p5 = json.load(f)

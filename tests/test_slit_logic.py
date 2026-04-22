@@ -48,7 +48,7 @@ def test_slit_geometry(setup_slit_env):
     subprocess.check_call(cmd, cwd=BASE_DIR, env=env)
     
     # 2. Check Generated Profiles
-    profiles_dir = os.path.join(OUTPUT_DIR, "Profiles", "SongMultiCam")
+    profiles_dir = os.path.join(OUTPUT_DIR, "Profiles", "slit_input")
     
     # Grid Calculation Expectations
     # full_w = 1920 // 3 = 640

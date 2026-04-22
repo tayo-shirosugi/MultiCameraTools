@@ -112,7 +112,7 @@ def generate(input_path, grid_size, output_dir=None, song_name=None,
         output_dir = os.path.join(os.path.dirname(input_path), "output")
     
     scripts_dir = os.path.join(output_dir, "Scripts")
-    profiles_dir = os.path.join(output_dir, "Profiles", "SongMultiCam")
+    profiles_dir = os.path.join(output_dir, "Profiles", song_name)
     os.makedirs(scripts_dir, exist_ok=True)
     os.makedirs(profiles_dir, exist_ok=True)
     
@@ -738,7 +738,7 @@ def generate(input_path, grid_size, output_dir=None, song_name=None,
     print(f"   Profiles: {profiles_dir}/")
     print(f"   Duration: {total_duration:.1f}s ({len(source_movements)} movements)")
     print()
-    print(f"NOTE: 配置前に既存の Profiles/SongMultiCam フォルダを削除してください。")
+    print(f"NOTE: 配置前に既存の Profiles/{song_name} フォルダを削除してください。")
 
 
 if __name__ == "__main__":

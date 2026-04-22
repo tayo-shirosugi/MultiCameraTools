@@ -186,7 +186,7 @@ try:
 
     # Zip the output
     print("Compressing output to ZIP...")
-    shutil.make_archive("SongMultiCam_Output", 'zip', output_dir)
+    shutil.make_archive(f"{profile_name}_Output", 'zip', output_dir)
     print("Done!")
     
     _result_status = "SUCCESS"
@@ -212,7 +212,7 @@ finally:
     if (status === "SUCCESS") {
       log(`<span style="color:var(--success)">✅ Generation successful! Preparing download...</span>`);
       
-      const zipData = pyodideInstance.FS.readFile('SongMultiCam_Output.zip');
+      const zipData = pyodideInstance.FS.readFile(prefix + '_Output.zip');
       triggerDownload(zipData, prefix + '_MultiCamera.zip');
       log(`<span style="color:var(--success)">Download triggered.</span>`);
     } else {

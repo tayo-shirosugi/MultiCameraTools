@@ -47,13 +47,13 @@ def test_quad_grid_generation(song_script_basic, temp_output_dir):
     
     # Check Slit Position (WindowRect)
     # Cam 01 (Col 0), Cam 02 (Col 1)
-    prof_path_1 = os.path.join(temp_output_dir, "Profiles", "SongMultiCam", "input_Cam_Grid2_01.json")
+    prof_path_1 = os.path.join(temp_output_dir, "Profiles", "input", "input_Cam_Grid2_01.json")
     if not os.path.exists(prof_path_1):
-        prof_path_1 = os.path.join(temp_output_dir, "Profiles", "SongMultiCam", "Cam_Grid2_01.json")
+        prof_path_1 = os.path.join(temp_output_dir, "Profiles", "input", "Cam_Grid2_01.json")
         
-    prof_path_2 = os.path.join(temp_output_dir, "Profiles", "SongMultiCam", "input_Cam_Grid2_02.json")
+    prof_path_2 = os.path.join(temp_output_dir, "Profiles", "input", "input_Cam_Grid2_02.json")
     if not os.path.exists(prof_path_2):
-        prof_path_2 = os.path.join(temp_output_dir, "Profiles", "SongMultiCam", "Cam_Grid2_02.json")
+        prof_path_2 = os.path.join(temp_output_dir, "Profiles", "input", "Cam_Grid2_02.json")
     
     with open(prof_path_1, "r") as f: p1 = json.load(f)
     with open(prof_path_2, "r") as f: p2 = json.load(f)

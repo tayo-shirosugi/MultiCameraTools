@@ -109,7 +109,7 @@ def test_effect_combination(setup_combo_env, grid_size, effect_name):
     
     # 5. Verify File Existence
     scripts_dir = os.path.join(current_output, "Scripts")
-    profiles_dir = os.path.join(current_output, "Profiles", "SongMultiCam")
+    profiles_dir = os.path.join(current_output, "Profiles", f"input_{grid_size}_{effect_name}")
     
     assert os.path.exists(scripts_dir)
     assert os.path.exists(profiles_dir)

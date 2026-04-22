@@ -1,5 +1,8 @@
 # マルチカメラツール (Multi-Camera Tools)
 
+WebAssembly版:
+https://tayo-shirosugi.github.io/MultiCameraTools/
+
 Beat Saber の CameraPlus 向けに、複数カメラの MovementScript を自動生成するツールセットです。
 楽曲の進行に合わせてカメラ台数を動的に切り替え（1→4→9→16台）、各カメラを個別スクリプトで制御することができます。
 
@@ -65,7 +68,7 @@ python generator_song_multicam.py -i SongScript.json -e EffectScript.json -o out
 | `-i`, `--input` | 元となる `SongScript.json` のパス | **必須** |
 | `-e`, `--effect-script` | `EffectScript.json` のパス | **必須** |
 | `-o`, `--output` | 生成物の出力先ディレクトリ | 任意 |
-| `-n`, `--name` | プロファイル名のプレフィックス | 任意 |
+| `-n`, `--name` | プロファイル(フォルダ)名およびスクリプトファイル名のプレフィックス | 任意 |
 
 ### EffectScript JSON フォーマット
 
@@ -92,22 +95,26 @@ python generator_song_multicam.py -i SongScript.json -e EffectScript.json -o out
 
 ### 利用可能なエフェクト一覧
 
+> [!NOTE]
+> 共通前提: `mosaic-blink` / `chronos-cascade` / `dimension-roulette` には BPM 同期の **Movement 分割**が必要です（BPM指定で既存Movementを細分化し、線形補間でキーフレームを生成）。
+
 | エフェクト名 (`effect`) | 概要 | 主要なパラメータ |
 |-----------------------|------|-----------------|
 | `all-visible` | 全カメラを常時表示（デフォルト） | なし |
-| `mosaic-blink` | カメラを市松模様状に交互に点滅表示 | なし |
-| `mosaic-shuffle` | 指定した密度でランダムにカメラを点滅 | `density`: 生存確率 (0.0-1.0) |
-| `chronos-cascade` | 列ごとに時間を遅延させ、波のような効果 | `delay`: 列ごとの遅延秒数 |
-| `radial-chronos` | 中心からの距離に応じて時間を遅延 | `delay`: 単位距離あたりの遅延秒数 |
-| `diagonal-wave` | 左上から斜め方向に時間を遅延 | `delay`: ステップごとの遅延秒数 |
-| `dimension-roulette` | FOVとZ回転（Roll）をランダムに変動 | なし |
+| `clone-grid` | 全カメラが同一の正面映像を映す（タイリングオフセット=0） | なし |
+| `mosaic-blink` | グリッドが市松模様で映像/黒を交互に切替 | なし |
+| `mosaic-shuffle` | ランダムなカメラパネルが確率で表示/非表示 | `density`: 生存確率 (0.0-1.0) |
+| `chronos-cascade` | 列ごとに過去映像を遅延再生（右列=リアル、左列=-1秒等） | `delay`: 列ごとの遅延秒数 |
+| `radial-chronos` | 中央から外側に向かって動きが波紋のように伝播 | `delay`: 単位距離あたりの遅延秒数 |
+| `diagonal-wave` | 左上から右下に向かって動きが伝播 | `delay`: ステップごとの遅延秒数 |
+| `dimension-roulette` | FOVとRollがランダム変化。Deterministic Random で再現性あり | なし |
 | `vortex-spin` | 各カメラを渦巻状に回転（Z軸）させる | `speed`: 回転速度, `mode`: "sync"/"wave" |
-| `split-view` | 3列構成時、左右を外側に向ける (三面鏡風) | `angle`: 外側への回転角度 (デフォルト 90) |
-| `surround-view` | 4台構成時、前後左右の4方向を向ける | なし |
-| `panoptic-view` | 9台構成時、中央1台+周囲8方向を囲む | なし |
-| `symmetry-view` | 対称配置を行い、アウトラインで強調 | `symmetry_type`: "mirror"/"point", `outline_side`: "left"/"right" |
-| `outline-fill` | 輪郭線のみの状態から徐々に実像で満たす | `step_delay`: 遅延ビート, `color_line`, `color_bg` |
-| `outline-wipe` | 輪郭線で画面を塗りつぶし、実像を消す | `step_delay`: 遅延ビート, `color_line`, `color_bg` |
+| `split-view` | 左列/中央列/右列が別アングルからアバターを捉える | `angle`: 左右の回り込み角度 (デフォルト 90) |
+| `surround-view` | 4台で正面/右/背後/左からアバターを囲む | — (2×2のみ) |
+| `panoptic-view` | 中央1台+周囲8台で360度囲む | — (3×3のみ) |
+| `symmetry-view` | 右半分が左半分の鏡像（または点対称）になる | `symmetry_type`: "mirror"/"point", `outline_side` |
+| `outline-fill` | 左上から順にアウトラインで塗りつぶし | `step_delay`: 遅延ビート, `color_line`, `color_bg` |
+| `outline-wipe` | 左上から順にアウトラインが通過して戻る | `step_delay`: 遅延ビート, `color_line`, `color_bg` |
 | `random-outline-fill`| ランダムな順序でカメラを実像で満たす | `duration_beats`: 全体の所要ビート, `color_line`, `color_bg` |
 
 ### エフェクトパラメータの指定例
@@ -136,11 +143,11 @@ python generator_song_multicam.py -i SongScript.json -e EffectScript.json -o out
 
 生成後、以下の手順で Beat Saber に配置します。
 
-1. `output_dir/Profiles/SongMultiCam/` → `UserData/CameraPlus/Profiles/SongMultiCam/`
+1. `output_dir/Profiles/[プロファイル名]/` → `UserData/CameraPlus/Profiles/[プロファイル名]/`
 2. `output_dir/Scripts/` → `UserData/CameraPlus/Scripts/`
-3. ゲーム起動後、CameraPlus のプロファイル選択で `SongMultiCam` を選択
+3. ゲーム起動後、CameraPlus のプロファイル選択で `[プロファイル名]` を選択
 
-> **⚠️ 注意**: アップデート時は `UserData/CameraPlus/Profiles/SongMultiCam` フォルダを**必ず一度全削除**してからファイルを配置してください。古いプロファイルが残っていると意図しないカメラが表示されます。
+> **⚠️ 注意**: アップデート時は `UserData/CameraPlus/Profiles/[プロファイル名]` フォルダを**必ず一度全削除**してからファイルを配置してください。古いプロファイルが残っていると意図しないカメラが表示されます。
 
 ---
 
@@ -161,29 +168,6 @@ python -m pytest tests/ -v
 3. 回転タイリングオフセットを適用（全カメラを同一座標に配置し、角度のみ変える）
 4. マスターカメラ(cameraplus)は独立オーケストレーター。自身をWindowControlで画面外（x=5000）に退避
 5. グリッドカメラ（Cam_Grid3_01〜09 等）は個別にタイリングオフセット付きスクリプトを持つ
-
----
-
-## 実装済みエフェクト
-
-共通前提: Mosaic Blink / Chronos Cascade / Dimension Roulette には BPM 同期の **Movement 分割**が必要です（BPM指定で既存Movementを細分化し、線形補間でキーフレームを生成）。
-
-| # | エフェクト名 | 概要 | 主なパラメータ |
-|---|------------|------|---------------|
-| 1 | **Mosaic Blink** | グリッドが市松模様で映像/黒を交互に切替 | — |
-| 2 | **Chronos Cascade** | 列ごとに過去映像を遅延再生（右列=リアル、左列=-1秒等） | `delay` (秒/列) |
-| 3 | **Radial Chronos** | 中央から外側に向かって動きが波紋のように伝播 | `delay` (秒/距離) |
-| 4 | **Dimension Roulette** | FOVとRollがランダム変化。Deterministic Random で再現性あり | — |
-| 5 | **Clone Grid** | 全カメラが同一の正面映像を映す（タイリングオフセット=0） | — |
-| 6 | **Outline Fill** | 左上から順にアウトラインで塗りつぶし | `step_delay`, `color_line`, `color_bg` |
-| 7 | **Outline Wipe** | 左上から順にアウトラインが通過して戻る | `step_delay`, `color_line`, `color_bg` |
-| 8 | **Vortex Spin** | 全カメラがZ軸回転 | `speed` (deg/sec), `mode` ("wave"で遅延伝播) |
-| 9 | **Symmetric View** | 右半分が左半分の鏡像（または点対称）になる | `symmetry_type` ("point"/"mirror"), `outline_side` |
-| 10 | **Diagonal Wave** | 左上から右下に向かって動きが伝播 | `delay` |
-| 11 | **Mosaic Shuffle** | ランダムなカメラパネルが確率で表示/非表示 | `density` (0.0〜1.0) |
-| 12 | **Split View** | 左列/中央列/右列が別アングルからアバターを捉える | `angle` (左右の回り込み角度) |
-| 13 | **Surround View** | 4台で正面/右/背後/左からアバターを囲む | — (2×2のみ) |
-| 14 | **Panoptic View** | 中央1台+周囲8台で360度囲む | — (3×3のみ) |
 
 ---
 

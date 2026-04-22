@@ -43,8 +43,8 @@ def test_single_grid_generation(song_script_basic, temp_output_dir):
     # Sometimes prefix is missing in test env? allow both
     prof_name_1 = "input_Cam_Grid1_01.json"
     prof_name_2 = "Cam_Grid1_01.json"
-    prof_path_1 = os.path.join(temp_output_dir, "Profiles", "SongMultiCam", prof_name_1)
-    prof_path_2 = os.path.join(temp_output_dir, "Profiles", "SongMultiCam", prof_name_2)
+    prof_path_1 = os.path.join(temp_output_dir, "Profiles", "input", prof_name_1)
+    prof_path_2 = os.path.join(temp_output_dir, "Profiles", "input", prof_name_2)
     
     sys.stderr.write(f"DEBUG: Checking {prof_path_1} or {prof_path_2}\n")
     
@@ -56,7 +56,7 @@ def test_single_grid_generation(song_script_basic, temp_output_dir):
         
     if not prof_path:
         sys.stderr.write(f"DEBUG: listdir({temp_output_dir}) = {os.listdir(temp_output_dir)}\n")
-        prof_dir = os.path.join(temp_output_dir, "Profiles", "SongMultiCam")
+        prof_dir = os.path.join(temp_output_dir, "Profiles", "input")
         if os.path.exists(prof_dir):
             sys.stderr.write(f"DEBUG: listdir({prof_dir}) = {os.listdir(prof_dir)}\n")
         else:
