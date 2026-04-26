@@ -131,7 +131,7 @@ def test_slit_offset(setup_integration_env):
     Actual placement is in Master Script's WindowControl.
     """
     # 1. Check Profile (Should be parked)
-    prof_01 = os.path.join(OUTPUT_DIR, "Profiles", "integration_input", "Cam_Grid2_01.json")
+    prof_01 = os.path.join(OUTPUT_DIR, "Profiles", "integration_input", "integration_input_Cam_Grid2_01.json")
     with open(prof_01, "r", encoding="utf-8") as f:
         p1 = json.load(f)
     assert p1["WindowRect"]["x"] == 5000, "Profile X should be parked at 5000 (off-screen initial position)"
@@ -144,9 +144,9 @@ def test_slit_offset(setup_integration_env):
     win_ctrl = data["Movements"][0]["WindowControl"]
     
     # Find Cam 01 and Cam 02 control entries
-    # Target names: "Cam_Grid2_01.json" (Profile name, not Script name)
-    t1_name = "Cam_Grid2_01.json"
-    t2_name = "Cam_Grid2_02.json"
+    # Target names: "integration_input_Cam_Grid2_01.json" (Profile name, not Script name)
+    t1_name = "integration_input_Cam_Grid2_01.json"
+    t2_name = "integration_input_Cam_Grid2_02.json"
     
     x1 = None
     x2 = None
@@ -223,17 +223,17 @@ def test_effect_script_loading():
     # So Grid 3 should NOT be generated if schedule only uses 1 and 4.
     
     # Check Grid 1
-    path_g1 = os.path.join(output_dir, "Profiles", "integration_input", "Cam_Grid1_01.json")
+    path_g1 = os.path.join(output_dir, "Profiles", "integration_input", "integration_input_Cam_Grid1_01.json")
     assert os.path.exists(path_g1), "Grid 1 profile should exist (schedule 0-1s)"
     
     # Check Grid 2 (4 cameras)
-    path_g2_01 = os.path.join(output_dir, "Profiles", "integration_input", "Cam_Grid2_01.json")
-    path_g2_04 = os.path.join(output_dir, "Profiles", "integration_input", "Cam_Grid2_04.json")
+    path_g2_01 = os.path.join(output_dir, "Profiles", "integration_input", "integration_input_Cam_Grid2_01.json")
+    path_g2_04 = os.path.join(output_dir, "Profiles", "integration_input", "integration_input_Cam_Grid2_04.json")
     assert os.path.exists(path_g2_01), "Grid 2 profile 01 should exist (schedule 1-2s)"
     assert os.path.exists(path_g2_04), "Grid 2 profile 04 should exist"
     
     # Check Grid 3 (Should NOT exist)
-    path_g3 = os.path.join(output_dir, "Profiles", "integration_input", "Cam_Grid3_01.json")
+    path_g3 = os.path.join(output_dir, "Profiles", "integration_input", "integration_input_Cam_Grid3_01.json")
     assert not os.path.exists(path_g3), "Grid 3 should NOT be generated because EffectScript didn't ask for it"
 
 def test_chronos_cascade_generation():
@@ -524,7 +524,7 @@ def test_inactive_camera_optimization():
     env["PYTHONUTF8"] = "1"
     subprocess.run(cmd, cwd=BASE_DIR, check=True, env=env)
     
-    # 2. Verify Cam_Grid2_01.json
+    # 2. Verify integration_input_Cam_Grid2_01.json
     # It should be hidden from 0-5s, and active from 5-10s.
     path_g2 = os.path.join(output_dir, "Scripts", "integration_input_Cam_Grid2_01.json")
     

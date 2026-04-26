@@ -161,8 +161,8 @@ def generate(input_path, grid_size, output_dir=None, song_name=None,
             sx = (c * full_w) + (SLIT_WIDTH // 2)
             sy = ((g_size - 1 - r) * full_h) + (SLIT_WIDTH // 2)
             
-            file_id = f"Cam_Grid{g_size}_{cam_i + 1:02d}"
-            script_filename = f"{song_name}_{file_id}.json"
+            file_id = f"{song_name}_Cam_Grid{g_size}_{cam_i + 1:02d}"
+            script_filename = f"{file_id}.json"
             
             # 情報を登録
             all_camera_info[file_id] = {

@@ -64,7 +64,7 @@ def test_slit_geometry(setup_slit_env):
     # y calculation: ((3 - 1 - 0) * full_h) + 3 = 2 * full_h + 3.
     
     # Check Cam 01
-    with open(os.path.join(profiles_dir, "Cam_Grid3_01.json"), "r") as f:
+    with open(os.path.join(profiles_dir, "slit_input_Cam_Grid3_01.json"), "r") as f:
         cam01 = json.load(f)
         rect = cam01["WindowRect"]
         
@@ -74,7 +74,7 @@ def test_slit_geometry(setup_slit_env):
         assert rect["x"] == OFF_SCREEN_X, f"X in profile should be {OFF_SCREEN_X}, got {rect['x']}"
         
     # Check Cam 02 (Row 0, Col 1)
-    with open(os.path.join(profiles_dir, "Cam_Grid3_02.json"), "r") as f:
+    with open(os.path.join(profiles_dir, "slit_input_Cam_Grid3_02.json"), "r") as f:
         cam02 = json.load(f)
         rect = cam02["WindowRect"]
         
@@ -96,8 +96,8 @@ def test_slit_geometry(setup_slit_env):
         win_ctrl = movements[0].get("WindowControl", [])
         
         # Find Cam01 and Cam02 in WindowControl
-        ctrl01 = next(c for c in win_ctrl if c["Target"] == "Cam_Grid3_01.json")
-        ctrl02 = next(c for c in win_ctrl if c["Target"] == "Cam_Grid3_02.json")
+        ctrl01 = next(c for c in win_ctrl if c["Target"] == "slit_input_Cam_Grid3_01.json")
+        ctrl02 = next(c for c in win_ctrl if c["Target"] == "slit_input_Cam_Grid3_02.json")
         
         real_x01 = ctrl01["StartPos"]["x"]
         real_x02 = ctrl02["StartPos"]["x"]

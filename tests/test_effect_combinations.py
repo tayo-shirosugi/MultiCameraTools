@@ -177,13 +177,13 @@ def test_effect_combination(setup_combo_env, grid_size, effect_name):
         # Movement 0
         wc0 = master["Movements"][0]["WindowControl"]
         for w in wc0:
-            if w["Target"].startswith(f"Cam_Grid{grid_size}_01") or w["Target"] == f"Cam_Grid{grid_size}_01.json":
+            if f"Cam_Grid{grid_size}_01" in w["Target"]:
                 vis_mov0 = w.get("Visible", True)
         
         # Movement 1
         wc1 = master["Movements"][1]["WindowControl"]
         for w in wc1:
-            if w["Target"].startswith(f"Cam_Grid{grid_size}_01") or w["Target"] == f"Cam_Grid{grid_size}_01.json":
+            if f"Cam_Grid{grid_size}_01" in w["Target"]:
                 vis_mov1 = w.get("Visible", True)
                 
         # With Mosaic Blink, they should differ (True/False)
